@@ -1,0 +1,99 @@
+<mat-card class="example-card" style="margin-top: 10px; margin-right: 20px; margin-left: 20px;" >
+  <mat-card-header>
+   
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="userform" onsubmit="SaveEmployee()">
+        <div class="example-container" style="margin-top: 20px; padding: 20px; display: flex; flex-wrap: nowrap; background-color: whitesmoke; border-radius: 4px;">
+        
+          <div style="flex: 1;"> 
+            <mat-form-field appearance="outline" style="width: 80%;">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Enter The Name" formControlName="name">
+            </mat-form-field>
+            <div *ngIf="userform.controls['name'].errors && userform.controls['name'].errors['required'] && userform.controls['name'].touched" [style.color]="'red'"> Name is Required</div>
+            <div *ngIf="userform.controls['name'].errors && userform.controls['name'].errors['minlength'] && userform.controls['name'].touched" [style.color]="'red'"> Name must be at least 4 characters long</div>
+          </div>
+        
+           <div style="flex: 1; margin-left: 10px;">
+            <mat-form-field appearance="outline" style="width: 80%;">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Enter The Address" formControlName="address">
+            </mat-form-field>
+            <div *ngIf="userform.controls['address'].invalid && userform.controls['address'].touched" [style.color]="'red'"> Address is Required</div>
+          </div> 
+
+          <div style="flex: 1; margin-left: 10px;">
+            <mat-form-field appearance="outline" style="width: 80%;">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="ex. user@gmail.com"  formControlName="Email">
+            </mat-form-field>
+            <div *ngIf="userform.controls['Email'].errors && userform.controls['Email'].errors['required'] && userform.controls['Email'].touched" [style.color]="'red'"> Email is Required</div>
+            <div *ngIf="userform.controls['Email'].errors && userform.controls['Email'].errors['email'] && userform.controls['Email'].touched" [style.color]="'red'"> Email is Invalid</div>
+          </div> 
+
+            <div style="flex: 1; margin-left: 10px;">
+              <mat-form-field appearance="outline" style="width: 80%;">
+                <mat-label>Designation</mat-label>
+                <mat-select formControlName="designation">
+                  <mat-option value=".Net Developer" >.Net Developer</mat-option>
+                  <mat-option value="Angular" >Angular</mat-option>
+                  <mat-option value="React.js">React.js</mat-option>
+                  <mat-option value="Java">Java</mat-option>
+                  <mat-option value="Flutter">Flutter</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div *ngIf="userform.controls['designation'].invalid && userform.controls['designation'].touched" [style.color]="'red'"> Designation is Required</div>
+            </div> 
+        </div>
+
+        <div class="example-container" style="padding: 20px; display: flex; flex-wrap: nowrap; background-color: whitesmoke; border-radius: 4px;">
+        
+          <div style="flex: 1;"> 
+            <mat-form-field appearance="outline" style="width: 80%;">
+              <mat-label>Mob No.</mat-label>
+              <span matTextPrefix>+91 &nbsp;</span>
+              <input matInput placeholder="Enter your Mobile No." formControlName="mobNo">
+            </mat-form-field>
+            <div *ngIf="userform.controls['mobNo'].errors && userform.controls['mobNo'].errors['required'] && userform.controls['mobNo'].touched" [style.color]="'red'"> Mobile.No is Required</div>
+            <div *ngIf="userform.controls['mobNo'].errors && userform.controls['mobNo'].errors['onlyDigits'] && userform.controls['mobNo'].touched" [style.color]="'red'">Enter only digits</div>
+            <div *ngIf="userform.controls['mobNo'].errors && userform.controls['mobNo'].errors['minlength'] && userform.controls['mobNo'].touched" [style.color]="'red'">Number should be in 11 digits</div>
+            <div *ngIf="userform.controls['mobNo'].errors && userform.controls['mobNo'].errors['maxlength'] && userform.controls['mobNo'].touched" [style.color]="'red'">Number should be not more than 11 digits</div>
+          </div>
+
+          <div style="flex: 1;"> 
+            <mat-form-field appearance="outline" style="width: 80%">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob">
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker">
+                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+              </mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 1;"> 
+            <mat-form-field appearance="outline" style="width: 80%;">
+              <mat-label>Work Experience</mat-label>
+              <input matInput placeholder="Years" formControlName="workexp">
+            </mat-form-field>
+          </div>
+
+          <div style="flex: 1;"> 
+            <mat-form-field appearance="outline" style="width: 80%">
+                <mat-label>Description</mat-label>
+                <textarea matInput placeholder="Why should we choose you?" formControlName="desc"></textarea>
+            </mat-form-field>
+        </div>
+         
+        </div>
+      </form>
+        
+      </mat-card-content>
+    <mat-card-actions style="flex-direction: row-reverse; padding: 12px;">
+      <button [disabled]="!userform.valid" (click)="SaveEmployee()" mat-raised-button color="primary">Save</button>
+    <button (click)="GoBack()" mat-raised-button color="warn" style="margin-right: 8px;">Close</button>
+  </mat-card-actions>
+</mat-card>
+
